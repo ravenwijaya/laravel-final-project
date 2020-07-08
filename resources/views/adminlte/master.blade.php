@@ -47,8 +47,29 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="{{ asset('/adminlte/plugins/jquery/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ asset('/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ asset('/adminlte/dist/js/adminlte.min.js') }}"></script>
+
 <script src="{{asset('/adminlte/plugins/datatables/jquery.dataTables.js')}}"></script>
 <script src="{{asset('/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
+
+<!-- Sweet Alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<script>
+$(function () {
+    Swal.fire({
+        icon: 'success',
+        text: 'Berhasil memasang script sweet alert'
+    });
+});
+</script>
+
 @stack('scripts')
 <!-- jQuery -->
 
