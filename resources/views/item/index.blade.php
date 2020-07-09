@@ -16,7 +16,7 @@
                 <span class="username">
                     <a href="#">{{ $item->user_name }}</a>
                 </span>
-                <span class="description">{{ $item->poinvote }} Reputation | Shared - {{$item->created_at}}</span>
+                <span class="description">{{ $item->user_reputasi }} Reputation | Shared - {{$item->created_at}}</span>
                 <hr>
             </div>
             <h5 class="card-title">
@@ -41,13 +41,15 @@
             <a href="{{ route('votepertanyaan.up', $item->id) }}" class="btn btn-sm btn-success">
                 <i class="fa fa-thumbs-up" aria-hidden="true"></i>
             </a>
-            <button type="submit" class="btn btn-sm btn-danger"> <i class="fa fa-thumbs-down" aria-hidden="false"></i> </button>
+            <a href="{{ route('votepertanyaan.down', $item->id) }}" class="btn btn-sm btn-danger">
+                <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+            </a>
             <a href="/jawaban/{{$item->id}}"  class="btn btn-primary btn-sm">Jawab</a>
         @endif
         <a href="{{ route('komentar.pertanyaan', $item->id) }}" class="btn btn-primary btn-sm">
             Komentar
         </a>
-    <span class="float-right text-muted">xx reputation - yy comments</span>
+    <span class="float-right text-muted">xx votes - yy comments</span>
     </div>
  </div>
 @endforeach

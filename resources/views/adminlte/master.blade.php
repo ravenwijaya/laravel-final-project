@@ -92,6 +92,16 @@ $(function () {
 });
 </script>
 
+@if (session('status'))
+<script>
+    $(function () {
+        Swal.fire({
+            icon: '{{ session('status')->state }}',
+            text: '{{ session('status')->message }}'
+        });
+    });
+</script>
+@endif
 
 @stack('scripts')
 <!-- jQuery -->
