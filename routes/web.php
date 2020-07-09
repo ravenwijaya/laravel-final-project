@@ -19,11 +19,11 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/pertanyaan','pertanyaanController@index')->name('pertanyaan.index');
-Route::get('/pertanyaan/create','pertanyaanController@create');
+Route::get('/pertanyaan/create','pertanyaanController@create')->name('pertanyaan.create');
 Route::post('/pertanyaanc','pertanyaanController@store');
 // Route::post('/pertanyaanvu','pertanyaanController@pertanyaanvoteu');
 // Route::post('/pertanyaanvd','pertanyaanController@pertanyaanvoted');
-Route::get('/pertanyaan/{id}','pertanyaanController@show');
+Route::get('/pertanyaan/{id}','pertanyaanController@show')->name('pertanyaan.show');
 Route::get('/pertanyaan/{id}/edit','pertanyaanController@edit');
 Route::put('/pertanyaan/{id}','pertanyaanController@update');
 Route::delete('/pertanyaan/{id}','pertanyaanController@destroy');
