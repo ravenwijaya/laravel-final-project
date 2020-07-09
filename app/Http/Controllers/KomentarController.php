@@ -14,12 +14,15 @@ class KomentarController extends Controller
     }
 
     public function jawaban($jawaban_id) {
+        $data = Komentar::get_jawaban($jawaban_id);
 
+        return view('komentar.jawaban', compact('data'));
     }
 
     public function store(Request $request, $id)
     {
         Komentar::store($request->all());
-        return redirect()->route('komentar.pertanyaan', $request['pertanyaan_id']);
+        //return redirect()->route('komentar.pertanyaan', $request['pertanyaan_id']);
+        return redirect()->back();
     }
 }

@@ -10,30 +10,31 @@ class VoteController extends Controller
 {
     public function pertanyaan_up($pertanyaan_id) {
         $status = Vote::vote('pertanyaan', $pertanyaan_id, Auth::user()->id, 'up');
-        $msg = new \stdClass();
-        if($status) {
-            $msg->state = 'success';
-            $msg->message = 'Terima kasih sudah vote';
-        } else {
-            $msg->state = 'error';
-            $msg->message = 'Anda sudah vote';
-        }
 
-        return redirect()->route('pertanyaan.index')->with('status', $msg);
+        return redirect()->back()->with('status', $status);
     }
 
     public function pertanyaan_down($pertanyaan_id) {
         $status = Vote::vote('pertanyaan', $pertanyaan_id, Auth::user()->id, 'down');
-        $msg = new \stdClass();
-        if($status) {
-            $msg->state = 'success';
-            $msg->message = 'Terima kasih sudah vote';
-        } else {
-            $msg->state = 'error';
-            $msg->message = 'Anda sudah vote';
-        }
 
-        return redirect()->route('pertanyaan.index')->with('status', $msg);
+        return redirect()->back()->with('status', $status);
     }
 
+    public function jawaban_up($pertanyaan_id) {
+        $status = Vote::vote('jawaban', $pertanyaan_id, Auth::user()->id, 'up');
+
+        return redirect()->back()->with('status', $status);
+    }
+
+    public function jawaban_down($pertanyaan_id) {
+        $status = Vote::vote('jawaban', $pertanyaan_id, Auth::user()->id, 'down');
+
+        return redirect()->back()->with('status', $status);
+    }
+
+    public function best_answer($jawaban_id) {
+        $status = Vote::best_answer($jawaban_id, Auth::user()->id);
+
+        return redirect()->back()->with('status', $status);
+    }
 }

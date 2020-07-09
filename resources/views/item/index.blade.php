@@ -1,8 +1,7 @@
 @extends('adminlte.master')
 
 @section('content')
-<br>
-<a href="{{ route('pertanyaan.create') }}" class="btn btn-primary mb-2">
+<a href="{{ route('pertanyaan.create') }}" class="btn btn-primary mb-3 mt-3">
     Buat Pertanyaan Baru
 </a>
 
@@ -20,7 +19,8 @@
                 <hr>
             </div>
             <h5 class="card-title">
-                <b><a href="{{ route('pertanyaan.show', $item->id) }}">{{ $item->judul }}</a></b>
+                {{-- <b><a href="{{ route('pertanyaan.show', $item->id) }}">{{ $item->judul }}</a></b> --}}
+                <b>{{ $item->judul }}</b>
             </h5>
             <p class="card-text">
                 {!! $item->isi !!}</p>
@@ -45,10 +45,12 @@
                 <i class="fa fa-thumbs-down" aria-hidden="true"></i>
             </a>
         @endif
-        <a href="/jawaban/{{$item->id}}"  class="btn btn-primary btn-sm">Jawab</a>
+        <a href="/jawaban/{{$item->id}}"  class="btn btn-primary btn-sm">Jawaban dan Komentar</a>
+        {{--
         <a href="{{ route('komentar.pertanyaan', $item->id) }}" class="btn btn-primary btn-sm">
             Komentar
         </a>
+        --}}
         <span class="float-right text-muted">xx votes - yy comments</span>
     </div>
  </div>

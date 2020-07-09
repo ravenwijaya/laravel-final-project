@@ -12,7 +12,7 @@ class PertanyaanModel {
                       ->get();
         return $tanya;
       }
- 
+
 //   public static function save($data){
 //       $new_tanya=DB::table('tanya')->insert($data);
 //       return $new_tanya;
@@ -28,7 +28,7 @@ class PertanyaanModel {
                  ->update([
                      'judul'=>$request['judul'],
                      'isi'=>$request['isi'],
-                     
+
                      ]);
       return $tanya;
   }
@@ -39,5 +39,14 @@ class PertanyaanModel {
                   ->delete();
        return $tanya;
    }
+
+   public static function pertanyaan_komentar($id) {
+        return DB::table('pertanyaan_komen as p')
+                 ->select('p.*', 'u.name', 'u.email')
+                 ->join('users as u', 'p.user_id', '=', 'u.id')
+                 ->where('p.pertanyaan_id', $id)
+                 ->orderBy('p.created_at')
+                 ->get();
+    }
 
 }

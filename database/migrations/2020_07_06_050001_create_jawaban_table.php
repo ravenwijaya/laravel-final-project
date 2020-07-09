@@ -16,11 +16,11 @@ class CreateJawabanTable extends Migration
         Schema::create('jawaban', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('isi');
-            $table->unsignedBigInteger('pertanyaan_id')->nullable();
+            $table->unsignedBigInteger('pertanyaan_id');
             $table->unsignedBigInteger('user_id');
             $table->integer('poinvote')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('pertanyaan_id')->references('id')->on('pertanyaan')->onDelete('cascade'); 
+            $table->foreign('pertanyaan_id')->references('id')->on('pertanyaan')->onDelete('cascade');
             $table->timestamps();
         });
     }

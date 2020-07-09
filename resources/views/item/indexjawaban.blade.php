@@ -1,19 +1,15 @@
 @extends('adminlte.master')
 
 @section('content')
-
-@if ($tanya->user_id != Auth::user()->id)
-    <a href="/jawaban/create/{{$tanya->id}}" class="btn btn-primary mb-3 mt-3">
-        Buat Jawaban Baru
-    </a>
-    <a href="{{ route('pertanyaan.index') }}" class="btn btn-secondary">Kembali</a>
-@endif
-
-
-
+<a href="{{ route('pertanyaan.index') }}" class="btn btn-secondary mb-3 mt-3">Kembali</a>
 <div class="card">
+    <div class="card-header">
+        <span class="badge badge-info">{{ $tanya->user_name }}</span> | {{ $tanya->user_reputasi ?: 0}} reputation
+        <span class="float-right text-muted">{{ $tanya->created_at }}</span>
+    </div>
     <div class="card-body">
         <div class="post">
+            {{--
             <div class="user-block">
                 <img class="img-circle img-bordered-sm" src="{{ asset('/adminlte/dist/img/user1-128x128.jpg')}}" alt="user image">
                 <span class="username">
@@ -23,29 +19,41 @@
                 <hr>
             </div>
             <a>vote: {{ $tanya->poinvote }}</a>
+            --}}
             <h3> {{ $tanya->judul }}</h3>
             <p class="card-text">{!! $tanya->isi !!}</p>
+
             <hr>
-            <button type="submit" class="btn btn-sm btn-success"> <i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
-            <button type="submit" class="btn btn-sm btn-warning"> <i class="fa fa-thumbs-down" aria-hidden="false"></i> </button>
+            <a href="{{ route('votepertanyaan.up', $tanya->id) }}" class="btn btn-sm btn-success {{ $tanya->user_id == Auth::user()->id ? 'disabled' : '' }}">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+            </a>
+            <a href="{{ route('votepertanyaan.down', $tanya->id) }}" class="btn btn-sm btn-danger {{ $tanya->user_id == Auth::user()->id ? 'disabled' : '' }}">
+                <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+            </a>
+
             <div class="comment">
                 <ol style="display:grid; list-style: none; margin-top: -2.5em" class="ml-5">
-                @forelse ($komentar as $i => $comment)
-                <li style="border-bottom: 1px solid rgba(95, 48, 48, 0.1)" class="pb-1">
-                    <span>{{ $i+1 }}. {{ $comment->isi }}.&nbsp;&nbsp;</span>
-                    <span class="badge badge-info" title="{{ $comment->email }}">{{ $comment->name }}</span>
-                    <span class="badge badge-warning">{{ $comment->created_at }}</span>
-                </li>
-                @empty
-                @endforelse
+                    @forelse ($komentar as $i => $comment)
+                    <li style="border-bottom: 1px solid rgba(95, 48, 48, 0.1)" class="pb-1">
+                        <span>{{ $i+1 }}. {{ $comment->isi }}.&nbsp;&nbsp;</span>
+                        <span class="badge badge-info" title="{{ $comment->email }}">{{ $comment->name }}</span>
+                        <span class="badge badge-warning">{{ $comment->created_at }}</span>
+                    </li>
+                    @empty
+                    @endforelse
                 </ol>
-                <!--
-                <ol style="display:grid; list-style: none; margin-top: -2.5em" class="ml-5">
-                    <li style="border-bottom: 1px solid rgba(95, 48, 48, 0.1)"><span><small class="text-muted">Last updated 3 mins ago Last updated 3 mins ago Last updated 3 mins ago Last updated 3 mins ago Last updated 3 mins agoLast updated 3 mins agoLast updated 3 mins ago Last updated 3 mins agoLast updated 3 mins ago Last updated 3 mins ago Last updated 3 mins agoLast updated 3 mins ago</small></span></li>
-                    <li style="border-bottom: 1px solid rgba(95, 48, 48, 0.1)"><span><small class="text-muted">Last updated 3 mins ago Last updated 3 mins ago Last updated 3 mins ago Last updated 3 mins ago Last updated 3 mins agoLast updated 3 mins agoLast updated 3 mins ago Last updated 3 mins agoLast updated 3 mins ago Last updated 3 mins ago Last updated 3 mins agoLast updated 3 mins ago</small></span></li>
-                    <li style="border-bottom: 1px solid rgba(95, 48, 48, 0.1)"><span><small class="text-muted">Last updated 3 mins ago Last updated 3 mins ago Last updated 3 mins ago Last updated 3 mins ago Last updated 3 mins agoLast updated 3 mins agoLast updated 3 mins ago Last updated 3 mins agoLast updated 3 mins ago Last updated 3 mins ago Last updated 3 mins agoLast updated 3 mins ago</small></span></li>
-                </ol>
-            -->
+                <form action="{{ route('komentar.store', $tanya->id) }}" method="POST" style="display:">
+                    @csrf
+                    <input type="hidden" name="tipe_komentar" value="pertanyaan">
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="pertanyaan_id" value="{{ $tanya->id }}">
+                    <div class="input-group input-group-sm mb-3">
+                        <input type="text" class="form-control" placeholder="Submit komentar pertamyaan" name="isi">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -56,27 +64,69 @@
 @if (count($jawab))
     @foreach ($jawab as $row)
     <div class="card">
-        <div class="card-header small">
-            {{ $row->user_name }} | {{ $row->user_reputasi}} reputation
+        <div class="card-header">
+            <span class="badge badge-info">{{ $row->user_name }}</span> | {{ $row->user_reputasi ?: 0}} reputation
             <span class="float-right text-muted">{{ $row->created_at }}</span>
         </div>
         <div class="card-body">
             {!! $row->isi !!}
+            <hr>
+            <a href="{{ route('votejawaban.up', $row->id) }}" class="btn btn-sm btn-success {{ $row->user_id == Auth::user()->id ? 'disabled' : '' }}">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+            </a>
+            <a href="{{ route('votejawaban.down', $row->id) }}" class="btn btn-sm btn-danger {{ $row->user_id == Auth::user()->id ? 'disabled' : '' }}">
+                <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+            </a>
+            <div class="comment">
+                <ol style="display:grid; list-style: none; margin-top: -2.5em" class="ml-5">
+                    @forelse ($row->komentar as $i => $comment)
+                    <li style="border-bottom: 1px solid rgba(95, 48, 48, 0.1)" class="pb-1">
+                        <span>{{ $i+1 }}. {{ $comment->isi }}.&nbsp;&nbsp;</span>
+                        <span class="badge badge-info" title="{{ $comment->user_email }}">{{ $comment->user_name }}</span>
+                        <span class="badge badge-warning">{{ $comment->created_at }}</span>
+                    </li>
+                    @empty
+                    <li style="border-bottom: 1px solid rgba(95, 48, 48, 0.1)" class="pb-1">
+                        <span>Belum ada komentar</span>
+                    </li>
+                    <br>
+                    @endforelse
+                </ol>
+                <form action="{{ route('komentar.store', $row->id) }}" method="POST" style="display:">
+                    @csrf
+                    <input type="hidden" name="tipe_komentar" value="jawaban">
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="jawaban_id" value="{{ $row->id }}">
+                    <div class="input-group input-group-sm mb-3">
+                        <input type="text" class="form-control" placeholder="Submit komentar jawaban" name="isi">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
         <div class="card-footer">
-            @if ($row->user_id != Auth::user()->id)
-                <a href="{{ route('votejawaban.up', $row->id) }}" class="btn btn-sm btn-success">
-                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                </a>
-                <a href="{{ route('votejawaban.down', $row->id) }}" class="btn btn-sm btn-danger">
-                    <i class="fa fa-thumbs-down" aria-hidden="true"></i>
-                </a>
-                <a href="/jawaban/{{$row->id}}"  class="btn btn-primary btn-sm">Komentar</a>
-            @endif
             @if ($tanya->user_id == Auth::user()->id)
-                <a href="/jawaban/{{$row->id}}"  class="btn bg-info btn-sm">Jawaban Terbaik</a>
+                @if($tanya->jawaban_terbaik && $tanya->jawaban_terbaik == $row->id)
+                    <a href="#" class="btn btn-sm btn-success disabled">
+                        Jawaban Terbaik
+                    </a>
+                @else
+                    <a href="{{ route('vote.best', $row->id) }}" class="btn btn-sm btn-success">
+                        Jawaban Terbaik
+                    </a>
+                @endif
+            @else
+                @if($tanya->jawaban_terbaik && $tanya->jawaban_terbaik == $row->id)
+                    <a href="#" class="btn btn-sm btn-success disabled">
+                        Jawaban Terbaik
+                    </a>
+                @else
+                    &nbsp;
+                @endif
             @endif
-        </div>
+       </div>
     </div>
     @endforeach
 @else
@@ -94,7 +144,9 @@
     <a href="{{ route('pertanyaan.index') }}" class="btn btn-secondary">Kembali</a>
 </form>
 <hr>
-{{-- comment dulu pening liat tabnya
+
+
+{{-- comment dulu gan, pening banget liat tabnya T_T
 
 @foreach($jawab as $key => $item)
 

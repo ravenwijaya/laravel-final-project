@@ -34,10 +34,12 @@ class JawabanController extends Controller
     }
 
      public function index($id) {
-        $jawab = JawabanModel::find_by_id($id);
+        //$jawab = JawabanModel::find_by_id($id);
+        $jawab = JawabanModel::jawaban_komentar($id);
         $tanya = JawabanModel::find_by_idtanya($id);
-        // ambil komentar
-        $komentar = JawabanModel::pertanyaan_komentar($id);
+
+        $komentar = PertanyaanModel::pertanyaan_komentar($id);
+
 
         return view('item.indexjawaban', compact('jawab','tanya', 'komentar'));
      }

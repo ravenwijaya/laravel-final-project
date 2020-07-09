@@ -43,9 +43,13 @@ Route::delete('/jawaban/{id}','jawabanController@destroy');
 
 Route::get('/komentar_pertanyaan/{id}', 'KomentarController@pertanyaan')->name('komentar.pertanyaan');
 Route::post('/komentar_pertanyaan/{id}', 'KomentarController@store')->name('komentar.store');
+Route::get('/komentar_jawaban/{id}', 'KomentarController@jawaban')->name('komentar.jawaban');
+Route::post('/komentar_jawaban/{id}', 'KomentarController@store')->name('komentar.jawaban.store');
 
 Route::get('/vote_pertanyaan_up/{id}', 'VoteController@pertanyaan_up')->name('votepertanyaan.up');
 Route::get('/vote_pertanyaan_down/{id}', 'VoteController@pertanyaan_down')->name('votepertanyaan.down');
 Route::get('/vote_jawaban_up/{id}', 'VoteController@jawaban_up')->name('votejawaban.up');
 Route::get('/vote_jawaban_down/{id}', 'VoteController@jawaban_down')->name('votejawaban.down');
+
+Route::get('/vote_jawaban_terbaik/{id}', 'VoteController@best_answer')->name('vote.best');
 
