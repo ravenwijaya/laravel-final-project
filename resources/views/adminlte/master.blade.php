@@ -80,7 +80,7 @@ $(function () {
 -->
 <script>
 $(function () {
-    $('textarea.summernote').summernote();
+    $('textarea.summernote').summernote({height: 150});
 });
 </script>
 
