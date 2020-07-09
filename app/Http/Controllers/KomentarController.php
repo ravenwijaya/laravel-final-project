@@ -10,7 +10,6 @@ class KomentarController extends Controller
 {
     public function pertanyaan($pertanyaan_id) {
         $data = Komentar::get_pertanyaan($pertanyaan_id);
-
         return view('komentar.pertanyaan', compact('data'));
     }
 

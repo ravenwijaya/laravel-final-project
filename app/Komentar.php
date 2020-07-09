@@ -10,13 +10,10 @@ class Komentar extends Model
     public static function get_pertanyaan($pertanyaan_id) {
         $data = [];
         $data['pertanyaan'] = DB::table('pertanyaan')->where('id', $pertanyaan_id)->first();
-        $data['komentar'] = DB::table('pertanyaan_komen')->where('pertanyaan_id', $pertanyaan_id)->get();
-        // user //
-        $data['user'] = DB::table('pertanyaan')
-                            ->join('users', 'pertanyaan.user_id', '=', 'users.id')
-                            ->where('pertanyaan.id', '=', $pertanyaan_id)
-                            ->select('users.name', 'users.email')
-                            ->first();
+        $data['komentar'] = DB::table('pertanyaan_komen as p')
+                    ->join('users as u', 'p.user_id', '=', 'u.id')
+                    ->select('p.*', 'u.id as user_id', 'u.name as username', 'u.email as useremail')
+                    ->where('pertanyaan_id', $pertanyaan_id)->get();
         // tags //
         $data['tags'] = DB::table('pertanyaan_tag')
                             ->join('pertanyaan', 'pertanyaan_tag.pertanyaan_id', '=', 'pertanyaan.id')

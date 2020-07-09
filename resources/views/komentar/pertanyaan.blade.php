@@ -16,17 +16,17 @@
                 <span class="badge badge-success">{{ $tag->tag_name }}</span>
             @endforeach
             <hr>
-            <div class="comment small">
+            <div class="comment">
                 @forelse ($data['komentar'] as $i => $item)
                     {{ $i+1 }}. {{ $item->isi }}.&nbsp;&nbsp;
-                    <span class="badge badge-info">{{ $data['user']->name }}</span>
-                    {{ $item->created_at }}
+                    <span class="badge badge-info" title="{{ $item->useremail }}">{{ $item->username }}</span>
+                    <span class="badge badge-warning">{{ $item->created_at }}</span>
+                    <hr>
                 @empty
                     <small>Belum ada komentar.</small>
+                    <hr>
                 @endforelse
-                </table>
             </div>
-            <hr>
             <form action="/komentar_pertanyaan/{{ $data['pertanyaan']->id }}" method="POST">
                 <input type="hidden" name="pertanyaan_id" value="{{ $data['pertanyaan']->id }}" />
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">

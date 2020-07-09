@@ -18,25 +18,30 @@ class JawabanController extends Controller
         return view('item.formjawaban',compact('id'));
     }
 
-    public function store(Request $request){
-    // dd($request);
+    public function store(Request $request, $id){
+        JawabanModel::new_jawaban($request->all(), $id);
+        /*
         $new_jawab = Jawaban::create([
             "isi" => $request["isi"],
             "pertanyaan_id" => $request["pertanyaan_id"],
             "user_id" => $request["user_id"],
             "poinvote" => $request["poinvote"],
         ]);
-        
+
         return redirect('/pertanyaan');
+        */
+        return redirect()->route('jawaban.index', $id);
     }
 
      public function index($id) {
-         $jawab = JawabanModel::find_by_id($id);
-         $tanya = JawabanModel::find_by_idtanya($id);
-      //dd($tanya);
-       return view('item.indexjawaban', compact('jawab','tanya'));
+        $jawab = JawabanModel::find_by_id($id);
+        $tanya = JawabanModel::find_by_idtanya($id);
+        // ambil komentar
+        $komentar = JawabanModel::pertanyaan_komentar($id);
+
+        return view('item.indexjawaban', compact('jawab','tanya', 'komentar'));
      }
-  
+
     // public function show($id){
     //     $jawab = Jawaban::find($id);
     //     // dd($item->tags);
