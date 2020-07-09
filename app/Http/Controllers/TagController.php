@@ -18,8 +18,4 @@ class TagController extends Controller
         return view('tag.show', compact('tag'));
     }
 
-  
-    
-
-  
 }
