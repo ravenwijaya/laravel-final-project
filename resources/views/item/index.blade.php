@@ -1,7 +1,9 @@
 @extends('adminlte.master')
 
 @section('content')
- 
+<a href="/pertanyaan/create" class="btn btn-primary mb-2">
+      Buat Pertanyaan Baru
+    </a>
 @foreach($tanya as $key => $item)
 
 
@@ -27,11 +29,19 @@
 
                 <button type="submit" class="btn btn-sm btn-success"> <i class="fa fa-thumbs-up" aria-hidden="true"></i></button> 
                 <button type="submit" class="btn btn-sm btn-warning"> <i class="fa fa-thumbs-down" aria-hidden="false"></i> </button> 
-               <form action="/pertanyaan/{{$item->id}}" method="post" style="display: inline">
+                <br><br>
+               
+                @if ($item->user_id == Auth::user()->id)
+                <form action="/pertanyaan/{{$item->id}}" method="post" style="display: inline">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-sm btn-danger"> <i class="fas fa-trash"></i> </button>
-              </form><br><br>
+              </form>
+                @else
+                  
+                @endif
+                
+             
               <button type="button" class="btn btn-primary">Answer</button>
               <button type="button" class="btn btn-primary">Comments</button>
 
