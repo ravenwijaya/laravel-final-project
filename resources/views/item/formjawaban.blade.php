@@ -8,12 +8,13 @@
       </div>
       <!-- /.card-header -->
       <!-- form start -->
-      <form role="form" action="/jawabanc" method="POST">
+      <form role="form" action="/jawaban/{{$id}}"  method="POST">
         @csrf
         <div class="card-body">
     
             <input type="hidden" class="form-control" id="user_id" value=" {{Auth::user()->id}}" name="user_id" readonly>
             <input type="hidden" class="form-control" id="poinvote" value=0 name="poinvote" readonly>
+            <input type="hidden" class="form-control" id="pertanyaan_id" value={{$id}} name="pertanyaan_id" readonly>
   
           <div class="form-group">
             <label for="isi">Isi</label>
@@ -24,7 +25,7 @@
         <!-- /.card-body -->
         <div class="card-footer">
           <button type="submit" class="btn btn-primary">Submit</button>
-          <a href="{{ route('pertanyaan.index') }}" class="btn btn-secondary">Kembali</a>
+          <a href="/jawaban/{{$id}}" class="btn btn-secondary">Kembali</a>
         </div>
       </form>
     </div>

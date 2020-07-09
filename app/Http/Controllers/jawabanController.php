@@ -13,25 +13,27 @@ use App\User;
 
 class JawabanController extends Controller
 {
-    public function create(){
-        return view('item.formjawaban');
+    public function create($id){
+      //  dd($id);
+        return view('item.formjawaban',compact('id'));
     }
 
-    // public function store(Request $request){
-     
-    //     $new_jawab = Jawaban::create([
-    //         "isi" => $request["isi"],
-    //         "pertanyaan_id" => $request["pertanyaan_id"],
-    //         "user_id" => $request["user_id"],
-    //         "poinvote" => $request["poinvote"],
-    //     ]);
+    public function store(Request $request){
+    // dd($request);
+        $new_jawab = Jawaban::create([
+            "isi" => $request["isi"],
+            "pertanyaan_id" => $request["pertanyaan_id"],
+            "user_id" => $request["user_id"],
+            "poinvote" => $request["poinvote"],
+        ]);
         
-    //     return redirect('/jawaban');
-    // }
+        return redirect('/pertanyaan');
+    }
 
-     public function index() {
-         $tanya = PertanyaanModel::get_all();
-         $jawab = JawabanModel::get_all();
+     public function index($id) {
+         $jawab = JawabanModel::find_by_id($id);
+         $tanya = JawabanModel::find_by_idtanya($id);
+      //dd($tanya);
        return view('item.indexjawaban', compact('jawab','tanya'));
      }
   
@@ -41,19 +43,19 @@ class JawabanController extends Controller
     //     return view('item.show', compact('jawab'));
     // }
 
-    // public function edit($id) {
-    //     $jawab = JawabanModel::find_by_id($id);
-    //     return view('item.editjawaban', compact('jawab'));
-    // }
+    public function edit($id) {
+        $jawab = JawabanModel::find_by_ids($id);
+        return view('item.editjawaban', compact('jawab'));
+    }
 
-    // public function update($id, Request $request) {
-    //     // dd($request->all());
-    //     $jawab = JawabanModel::update($id, $request->all());
-    //     return redirect('/pertanyaan');
-    // }
+    public function update($id, Request $request) {
+        // dd($request->all());
+        $jawab = JawabanModel::update($id, $request->all());
+        return redirect('/pertanyaan');
+    }
 
-    // public function destroy($id) {
-    //     $deleted = JawabanModel::destroy($id);
-    //     return redirect('/pertanyaan');
-    // }
+    public function destroy($id) {
+        $deleted = JawabanModel::destroy($id);
+        return redirect('/pertanyaan');
+    }
 }

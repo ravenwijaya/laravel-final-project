@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/pertanyaan','pertanyaanController@index')->name('pertanyaan.index');
 Route::get('/pertanyaan/create','pertanyaanController@create')->name('pertanyaan.create');
 Route::post('/pertanyaanc','pertanyaanController@store');
@@ -28,12 +28,9 @@ Route::get('/pertanyaan/{id}/edit','pertanyaanController@edit');
 Route::put('/pertanyaan/{id}','pertanyaanController@update');
 Route::delete('/pertanyaan/{id}','pertanyaanController@destroy');
 
-
-
-
 Route::get('/jawaban/{id}','jawabanController@index');
-Route::get('/jawaban/create','jawabanController@create');
-Route::post('/jawabanc','jawabanController@store');
+Route::get('/jawaban/create/{id}','jawabanController@create');
+Route::post('/jawaban/{id}','jawabanController@store');
 // // Route::post('/pertanyaanvu','pertanyaanController@pertanyaanvoteu');
 // Route::post('/pertanyaanvd','pertanyaanController@pertanyaanvoted');
 // Route::get('/jawaban/{id}','jawabanController@show');
