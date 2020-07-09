@@ -13,10 +13,10 @@ class PertanyaanModel {
         return $tanya;
       }
  
-  public static function save($data){
-      $new_tanya=DB::table('tanya')->insert($data);
-      return $new_tanya;
-  }
+//   public static function save($data){
+//       $new_tanya=DB::table('tanya')->insert($data);
+//       return $new_tanya;
+//   }
   public static function find_by_id($id){
       $tanya=DB::table('pertanyaan')->where('id',$id)->first();
       return $tanya;
