@@ -21,15 +21,15 @@
             <label for="judul">Judul</label>
             <input type="text" class="form-control" id="judul" value="{{$tanya->judul}}" name="judul" placeholder="Enter Judul ">
           </div>
-<!-- 
+ 
           <div class="form-group">
             <label for="isi">Isi</label>
-            <textarea class="form-control summernote" id="isi" value="{!!$tanya->isi!!}"name="isi" placeholder="Isi pertanyaan"></textarea>
-          </div>  -->
+            <textarea class="form-control summernote" id="isi" value="<textarea>{!!$tanya->isi!!}</textarea>"name="isi" placeholder="Isi pertanyaan"></textarea>
+          </div>  
           
           <div class="form-group">
             <label for="isi">Isi</label>
-            <input type="text" class="form-control" id="isi" value="{!!$tanya->isi!!}" name="isi" placeholder="isi">
+            <input type="text" class="form-control" id="isi" value="<textarea>{$tanya->isi}</textarea>" name="isi" placeholder="isi">
           </div>
       
         </div>

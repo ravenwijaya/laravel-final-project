@@ -16,7 +16,8 @@
                     <!-- Post -->
                     <div class="post">
                       <div class="user-block">
-                       
+                      <img class="img-circle img-bordered-sm" src="{{ asset('/adminlte/dist/img/user1-128x128.jpg')}}" alt="user image">
+                         
                         <span class="username">
                             <h3> {{ $tanya->judul }} </h3>
                   
@@ -26,7 +27,7 @@
                       <!-- /.user-block -->
                     
                       <p>
-                      {{ $tanya->isi }} 
+                      {!! $tanya->isi !!} 
                       </p>
 
                       <p>

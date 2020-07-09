@@ -8,44 +8,23 @@
 
 @foreach($tanya as $key => $item)
 
-<div class="card" style="width: 50rem;">
-<div class="card-body">
-
-<div class="post">
-                  <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="{{ asset('/adminlte/dist/img/user1-128x128.jpg')}}" alt="user image">
-                        <span class="username">
-                          <a href="#">{{ $item->user_name }}</a>
-
-                        </span>
-                    <span class="description">Shared publicly - {{$item->created_at}}</span>
-                    <hr>
-                  </div>
-                  <a >vote: {{ $item->poinvote }}</a>
-                  <h3> {{ $item->judul }}</h3>
-                  <p>
-                  {!! $item->isi !!}
-                  </p>
-
-                <button type="submit" class="btn btn-sm btn-success"> <i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
-                <button type="submit" class="btn btn-sm btn-warning"> <i class="fa fa-thumbs-down" aria-hidden="false"></i> </button>
-
-
-                @if ($item->user_id == Auth::user()->id)
-                <form action="/pertanyaan/{{$item->id}}" method="post" style="display: inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-sm btn-danger"> <i class="fas fa-trash"></i> </button>
-                  </form>
-                  <a href="/pertanyaan/{{$item->id}}/edit" class="btn btn-sm btn-danger">edit</a>
-
-            @else
-            @endif
-
+<div class="card">
+    <div class="card-body">
+        <div class="post">
+            <div class="user-block">
+                <img class="img-circle img-bordered-sm" src="{{ asset('/adminlte/dist/img/user1-128x128.jpg')}}" alt="user image">
+                <span class="username">
+                    <a href="#">{{ $item->user_name }}</a>
+                </span>
+                <span class="description">{{ $item->poinvote }} Reputation | Shared - {{$item->created_at}}</span>
                 <hr>
-                <a href="/jawaban/{{$item->id}}"  class="btn btn-primary">Jawaban</a>
-                <button type="button" class="btn btn-primary">Komentar</button>
-
+            </div>
+            <h5 class="card-title">
+                <b><a href="{{ route('pertanyaan.show', $item->id) }}">{{ $item->judul }}</a></b>
+            </h5>
+            <p class="card-text">
+                {!! $item->isi !!}</p>
+            </p>
         </div>
     </div>
     <div class="card-footer">
