@@ -28,9 +28,6 @@ Route::get('/pertanyaan/{id}/edit','pertanyaanController@edit');
 Route::put('/pertanyaan/{id}','pertanyaanController@update');
 Route::delete('/pertanyaan/{id}','pertanyaanController@destroy');
 
-
-
-
 Route::get('/jawaban/{id}','jawabanController@index');
 Route::get('/jawaban/create','jawabanController@create');
 Route::post('/jawabanc','jawabanController@store');
@@ -41,3 +38,9 @@ Route::get('/jawaban/{id}/edit','jawabanController@edit');
 Route::put('/jawaban/{id}','jawabanController@update');
 Route::delete('/jawaban/{id}','jawabanController@destroy');
 
+
+Route::get('/komentar_pertanyaan/{id}', 'KomentarController@pertanyaan')->name('komentar.pertanyaan');
+Route::post('/komentar_pertanyaan/{id}', 'KomentarController@store')->name('komentar.store');
+
+Route::get('/vote_pertanyaan_up/{id}', 'VoteController@pertanyaan_up')->name('votepertanyaan.up');
+Route::get('/vote_pertanyaan_down/{id}', 'VoteController@pertanyaan_down')->name('votepertanyaan.down');

@@ -26,7 +26,7 @@ class PertanyaanController extends Controller
     }
 
     public function store(Request $request){
-     
+
         $new_tanya = Pertanyaan::create([
             "judul" => $request["judul"],
             "isi" => $request["isi"],
@@ -46,7 +46,7 @@ class PertanyaanController extends Controller
             $tag = Tag::firstOrCreate($tagCheck);
             $new_tanya->tags()->attach($tag->id);
         }
-        
+
         return redirect('/pertanyaan');
     }
 
@@ -61,14 +61,14 @@ class PertanyaanController extends Controller
 
 
 
-   
 
 
 
 
 
 
-  
+
+
     public function show($id){
         $tanya = Pertanyaan::find($id);
         // dd($item->tags);
