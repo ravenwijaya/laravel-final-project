@@ -7,7 +7,7 @@ class PertanyaanModel {
 
     public static function get_all(){
         $tanya = DB::table('pertanyaan')
-                      ->select('pertanyaan.*', 'users.name as user_name', 'users.id as user_id')
+                      ->select('pertanyaan.*', 'users.name as user_name', 'users.id as user_id','users.reputasi as user_reputasi')
                       ->join('users', 'pertanyaan.user_id', '=', 'users.id')
                       ->get();
         return $tanya;

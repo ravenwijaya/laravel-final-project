@@ -8,10 +8,12 @@
       </div>
       <!-- /.card-header -->
       <!-- form start -->
-      <form role="form" action="/pertanyaan" method="POST">
+      <form role="form" action="/pertanyaanc" method="POST">
         @csrf
         <div class="card-body">
-          <input type="hidden" class="form-control" id="user_id" value=" {{Auth::user()->id}}" name="user_id" readonly>
+    
+            <input type="hidden" class="form-control" id="user_id" value=" {{Auth::user()->id}}" name="user_id" readonly>
+            <input type="hidden" class="form-control" id="poinvote" value=0 name="poinvote" readonly>
           <div class="form-group">
             <label for="judul">Judul</label>
             <input type="text" class="form-control" id="judul" name="judul" placeholder="Judul pertanyaan">
