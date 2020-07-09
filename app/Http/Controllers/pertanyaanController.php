@@ -8,7 +8,6 @@ use App\Models\PertanyaanModel;
 
 //Model Eloquent
 use App\Pertanyaan;
-use App\Pertanyaanvote;
 use App\Models\Tag;
 use App\User;
 
@@ -62,31 +61,7 @@ class PertanyaanController extends Controller
 
 
 
-    // public function pertanyaanvoteu(Request $request){
-    //   //  dd($request);
-    //   unset($request["_token"]);
-    //     $new_tanya = pertanyaanvote::create([
-    //         "user_id" => $request["user_id"],
-    //         "pertanyaan_id" => $request["id"],
-    //         "tipe_vote" =>"up",
-    //     ]);
-
-    //      dd($request);
-    //     return redirect('/pertanyaan');
-    // }
-    
-    // public function pertanyaanvoted(Request $request){
-     
-    //     $new_tanya = Pertanyaanvote::create([
-    //         "user_id" => $request["user_id"],
-    //         "pertanyaan_id" => $request["pertanyaan_id"],
-    //         "tipe_vote" =>"down",
-    //     ]);
-
-    //     // dd($tagsMulti);
-    //     return redirect('/pertanyaan');
-    // }
-
+   
 
 
 

@@ -41,8 +41,8 @@
                   
                 @endif
                 <br><br>
-              <a href="/jawaban/{{$item->id}}"  class="btn btn-primary">Jawaban</a>
-            
+             
+              <button type="button" class="btn btn-primary">Answer</button>
               <button type="button" class="btn btn-primary">Comments</button>
 
   </div>
