@@ -16,9 +16,13 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-  <!-- TinyMCE -->
-  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-  <script>tinymce.init({ selector:'textarea.tiny' });</script>
+  <!-- jQuery -->
+  <script src="{{ asset('/adminlte/plugins/jquery/jquery.min.js') }}"></script>
+
+  <!-- include summernote css/js -->
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -53,8 +57,6 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery -->
-<script src="{{ asset('/adminlte/plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
@@ -66,6 +68,7 @@
 <!-- Sweet Alert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
+<!--
 <script>
 $(function () {
     Swal.fire({
@@ -74,6 +77,13 @@ $(function () {
     });
 });
 </script>
+-->
+<script>
+$(function () {
+    $('textarea.summernote').summernote();
+});
+</script>
+
 
 @stack('scripts')
 <!-- jQuery -->
