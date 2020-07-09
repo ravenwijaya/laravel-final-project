@@ -17,9 +17,13 @@ class CreateJawabanTable extends Migration
             $table->bigIncrements('id');
             $table->string('isi');
             $table->unsignedBigInteger('pertanyaan_id')->nullable();
+<<<<<<< Updated upstream
             $table->unsignedBigInteger('user_id');
             $table->foreign('pertanyaan_id')->references('id')->on('pertanyaan');
             $table->foreign('user_id')->references('id')->on('users');
+=======
+            $table->foreign('pertanyaan_id')->references('id')->on('pertanyaan')->onDelete('cascade'); 
+>>>>>>> Stashed changes
             $table->timestamps();
         });
     }

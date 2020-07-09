@@ -17,8 +17,8 @@ class CreateJawabanVotesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('jawaban_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users'); 
-            $table->foreign('jawaban_id')->references('id')->on('jawaban'); 
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('jawaban_id')->references('id')->on('jawaban')->onDelete('cascade');
             $table->timestamps();
         });
     }

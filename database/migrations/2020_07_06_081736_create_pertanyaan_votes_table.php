@@ -18,7 +18,7 @@ class CreatePertanyaanVotesTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users'); 
             $table->unsignedBigInteger('pertanyaan_id')->nullable();
-            $table->foreign('pertanyaan_id')->references('id')->on('pertanyaan'); 
+            $table->foreign('pertanyaan_id')->references('id')->on('pertanyaan')->onDelete('cascade'); 
             $table->timestamps();
         });
     }
