@@ -28,10 +28,11 @@ class Vote extends Model
             $maker = DB::table($tipe_post.' as p')
                         ->join('users as u', 'p.user_id', '=', 'u.id')
                         ->where('p.id', $tipe_post_id)
-                        ->select('u.id', 'u.reputasi')
+                        ->select('u.id as user_id', 'u.reputasi', 'p.id as post_id', 'p.poinvote')
                         ->first();
 
             $now = date_create()->format('Y-m-d H:i:s');
+
             $votes = DB::table($tipe_post.'votes')->insert([
                 'user_id' => $user_id,
                 $tipe_post.'_id' => $tipe_post_id,
@@ -39,17 +40,28 @@ class Vote extends Model
                 'created_at' => $now,
                 'updated_at' => $now
             ]);
+
             $reputasi = intval($maker->reputasi);
+            $poinvote = intval($maker->poinvote);
+
             if($tipe_vote == 'up') {
                 $reputasi += 10;
+                $poinvote++;
             } else if($tipe_vote == 'down') {
                 $reputasi--;
+                $poinvote--;
             }
             $update_reputation = DB::table('users')
-                ->where('id', $maker->id)
+                ->where('id', $maker->user_id)
                 ->update([
                     'reputasi' => $reputasi,
                     'updated_at' => $now
+                ]);
+
+            $update_poinvote = DB::table($tipe_post)
+                ->where('id', $maker->post_id)
+                ->update([
+                    'poinvote' => $poinvote,
                 ]);
 
             return [

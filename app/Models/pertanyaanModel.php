@@ -10,6 +10,22 @@ class PertanyaanModel {
                       ->select('pertanyaan.*', 'users.name as user_name', 'users.id as user_id','users.reputasi as user_reputasi')
                       ->join('users', 'pertanyaan.user_id', '=', 'users.id')
                       ->get();
+
+        foreach($tanya as $i => $item) {
+            // tempelkan tag
+            $tags = DB::table('pertanyaan_tag as pt')
+                        ->select('t.tag_name')
+                        ->join('tags as t', 't.id', '=', 'pt.tag_id')
+                        ->where('pt.pertanyaan_id', $item->id)
+                        ->get();
+            $tanya[$i]->tags = $tags;
+            // tempel count komentar
+            $comments = DB::table('pertanyaan_komen')
+                        ->where('pertanyaan_id', $item->id)
+                        ->count();
+            $tanya[$i]->komentar_count = $comments;
+        }
+
         return $tanya;
       }
 

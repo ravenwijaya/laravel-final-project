@@ -33,7 +33,20 @@ public static function find_by_ids($id){
                     ->select('pertanyaan.*', 'users.name as user_name', 'users.id as user_id','users.reputasi as user_reputasi')
                     ->join('users', 'pertanyaan.user_id', '=', 'users.id')
                     ->where('pertanyaan.id',$id)->first();
-      return $tanya;
+    // tempelkan tag
+        $tags = DB::table('pertanyaan_tag as pt')
+                    ->select('t.tag_name')
+                    ->join('tags as t', 't.id', '=', 'pt.tag_id')
+                    ->where('pt.pertanyaan_id', $tanya->id)
+                    ->get();
+        $tanya->tags = $tags;
+
+        // tempel count komentar
+        $comments = DB::table('pertanyaan_komen')
+                    ->where('pertanyaan_id', $tanya->id)
+                    ->count();
+        $tanya->komentar_count = $comments;
+        return $tanya;
   }
   public static function update($id, $request){
      // dd($request);
@@ -74,7 +87,7 @@ public static function find_by_ids($id){
 
         foreach($jawaban as $i => $item) {
             $komentar = DB::table('jawaban_komen as j')
-            ->select('j.*', 'u.name as user_name', 'u.email as user_email', 'u.reputasi as user_reputasi')
+                ->select('j.*', 'u.name as user_name', 'u.email as user_email', 'u.reputasi as user_reputasi')
                 ->join('users as u', 'j.user_id', '=', 'u.id')
                 ->where('j.jawaban_id', $item->id)
                 ->orderBy('j.created_at')

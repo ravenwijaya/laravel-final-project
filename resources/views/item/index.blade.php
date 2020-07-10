@@ -5,7 +5,7 @@
     Buat Pertanyaan Baru
 </a>
 
-@foreach($tanya as $key => $item)
+@forelse($tanya as $key => $item)
 
 <div class="card">
     <div class="card-body">
@@ -25,6 +25,9 @@
             <p class="card-text">
                 {!! $item->isi !!}</p>
             </p>
+            @foreach ($item->tags as $tag)
+                <span class="badge badge-info">{{ $tag->tag_name }}</span>
+            @endforeach
         </div>
     </div>
     <div class="card-footer">
@@ -51,10 +54,16 @@
             Komentar
         </a>
         --}}
-        <span class="float-right text-muted">xx votes - yy comments</span>
+        <span class="float-right text-muted">{{ $item->poinvote }} votes | {{ $item->komentar_count }} comments</span>
     </div>
  </div>
-@endforeach
+@empty
+<div class="card">
+    <div class="card-body">
+        Belum ada pertanyaan. Silahkan buat baru.
+    </div>
+</div>
+@endforelse
 
 @endsection
 

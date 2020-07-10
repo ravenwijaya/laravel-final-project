@@ -22,7 +22,9 @@
             --}}
             <h3> {{ $tanya->judul }}</h3>
             <p class="card-text">{!! $tanya->isi !!}</p>
-
+            @foreach ($tanya->tags as $tag)
+                <span class="badge badge-info">{{ $tag->tag_name }}</span>
+            @endforeach
             <hr>
             <a href="{{ route('votepertanyaan.up', $tanya->id) }}" class="btn btn-sm btn-success {{ $tanya->user_id == Auth::user()->id ? 'disabled' : '' }}">
                 <i class="fa fa-thumbs-up" aria-hidden="true"></i>
@@ -56,6 +58,9 @@
                 </form>
             </div>
         </div>
+    </div>
+    <div class="card-footer">
+        <span class="float-right text-muted">{{ $tanya->poinvote }} votes | {{ $tanya->komentar_count }} comments</span>
     </div>
  </div>
 
@@ -113,9 +118,13 @@
                         Jawaban Terbaik
                     </a>
                 @else
-                    <a href="{{ route('vote.best', $row->id) }}" class="btn btn-sm btn-success">
-                        Jawaban Terbaik
-                    </a>
+                    @if(!$tanya->jawaban_terbaik)
+                        <a href="{{ route('vote.best', $row->id) }}" class="btn btn-sm btn-success">
+                            Jawaban Terbaik
+                        </a>
+                    @else
+                        &nbsp;
+                    @endif
                 @endif
             @else
                 @if($tanya->jawaban_terbaik && $tanya->jawaban_terbaik == $row->id)
@@ -126,6 +135,7 @@
                     &nbsp;
                 @endif
             @endif
+            <span class="float-right text-muted">{{ $row->poinvote ?: 0 }} votes | {{ count($row->komentar) }} comments</span>
        </div>
     </div>
     @endforeach
