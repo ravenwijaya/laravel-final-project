@@ -18,7 +18,7 @@ Route::get('/', function () {
     // return view('item.index');
     return view('auth.login');
 });
-
+Route::group(['middleware'=>'auth'],function(){
 //Route::get('/', 'HomeController@index')->name('home');
 Route::get('/pertanyaan','pertanyaanController@index')->name('pertanyaan.index');
 Route::get('/pertanyaan/create','pertanyaanController@create')->name('pertanyaan.create');
@@ -53,3 +53,5 @@ Route::get('/vote_jawaban_down/{id}', 'VoteController@jawaban_down')->name('vote
 
 Route::get('/vote_jawaban_terbaik/{id}', 'VoteController@best_answer')->name('vote.best');
 
+
+});
