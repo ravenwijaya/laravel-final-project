@@ -80,9 +80,11 @@
             <a href="{{ route('votejawaban.up', $row->id) }}" class="btn btn-sm btn-success {{ $row->user_id == Auth::user()->id ? 'disabled' : '' }}">
                 <i class="fa fa-thumbs-up" aria-hidden="true"></i>
             </a>
+           
             <a href="{{ route('votejawaban.down', $row->id) }}" class="btn btn-sm btn-danger {{ $row->user_id == Auth::user()->id ? 'disabled' : '' }}">
                 <i class="fa fa-thumbs-down" aria-hidden="true"></i>
             </a>
+            
             <div class="comment">
                 <ol style="display:grid; list-style: none; margin-top: -2.5em" class="ml-5">
                     @forelse ($row->komentar as $i => $comment)
@@ -90,6 +92,7 @@
                         <span>{{ $i+1 }}. {{ $comment->isi }}.&nbsp;&nbsp;</span>
                         <span class="badge badge-info" title="{{ $comment->user_email }}">{{ $comment->user_name }}</span>
                         <span class="badge badge-warning">{{ $comment->created_at }}</span>
+                      
                     </li>
                     @empty
                     <li style="border-bottom: 1px solid rgba(95, 48, 48, 0.1)" class="pb-1">
