@@ -49,8 +49,9 @@
                     <input type="hidden" name="tipe_komentar" value="pertanyaan">
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <input type="hidden" name="pertanyaan_id" value="{{ $tanya->id }}">
+                    <br>
                     <div class="input-group input-group-sm mb-3">
-                        <input type="text" class="form-control" placeholder="Submit komentar pertamyaan" name="isi">
+                        <input type="text" class="form-control" placeholder="Submit komentar pertanyaan" name="isi">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">Submit</button>
                         </div>

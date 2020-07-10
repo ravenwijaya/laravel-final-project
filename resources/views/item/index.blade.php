@@ -47,8 +47,13 @@
             <a href="{{ route('votepertanyaan.down', $item->id) }}" class="btn btn-sm btn-danger">
                 <i class="fa fa-thumbs-down" aria-hidden="true"></i>
             </a>
+            
         @endif
-        <a href="/jawaban/{{$item->id}}"  class="btn btn-primary btn-sm">Jawaban dan Komentar</a>
+        @if ($item->user_id == Auth::user()->id)
+               
+                  <a href="/pertanyaan/{{$item->id}}/edit" class="btn btn-sm btn-danger">edit</a>
+                  @endif
+                    <a href="/jawaban/{{$item->id}}"  class="btn btn-primary btn-sm">Jawaban dan Komentar</a>
         {{--
         <a href="{{ route('komentar.pertanyaan', $item->id) }}" class="btn btn-primary btn-sm">
             Komentar

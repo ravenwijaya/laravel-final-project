@@ -14,7 +14,7 @@ class AddColumnJawabanTerbaik extends Migration
     public function up()
     {
         Schema::table('pertanyaan', function (Blueprint $table) {
-            $table->unsignedBigInteger('jawaban_terbaik');
+            $table->unsignedBigInteger('jawaban_terbaik')->nullable();;
             $table->foreign('jawaban_terbaik')->references('id')->on('jawaban');
         });
     }

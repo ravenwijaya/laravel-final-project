@@ -24,13 +24,9 @@
  
           <div class="form-group">
             <label for="isi">Isi</label>
-            <textarea class="form-control summernote" id="isi" value="<textarea>{!!$tanya->isi!!}</textarea>"name="isi" placeholder="Isi pertanyaan"></textarea>
+            <textarea class="form-control summernote" id="isi" name="isi" placeholder="Isi pertanyaan">{!!$tanya->isi!!}</textarea>
           </div>  
-          
-          <div class="form-group">
-            <label for="isi">Isi</label>
-            <input type="text" class="form-control" id="isi" value="<textarea>{$tanya->isi}</textarea>" name="isi" placeholder="isi">
-          </div>
+         
       
         </div>
         <!-- /.card-body -->
