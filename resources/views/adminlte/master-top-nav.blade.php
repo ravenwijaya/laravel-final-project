@@ -57,13 +57,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i class="fas fa-sign-out-alt mr-1"></i> Logout
+                <i class="fas fa-sign-out-alt mr-1"></i> {{ Auth::check() ? Auth::user()->name : '' }} Logout
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
-
-            </li>
+         </li>
         </ul>
 
         <!-- SEARCH FORM -->

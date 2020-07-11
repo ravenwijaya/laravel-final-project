@@ -52,17 +52,19 @@ class JawabanController extends Controller
 
     public function edit($id) {
         $jawab = JawabanModel::find_by_ids($id);
+
         return view('item.editjawaban', compact('jawab'));
     }
 
     public function update($id, Request $request) {
         $a=$request->all();
         $jawab = JawabanModel::update($id, $request->all());
-        return redirect('/pertanyaan');
+        ///return redirect('/pertanyaan');
+        return redirect('/jawaban/'.$a['pertanyaan_id']);
     }
 
     public function destroy($id) {
         $deleted = JawabanModel::destroy($id);
-        return redirect('/pertanyaan');
+        return redirect('/jawaban/'.$deleted);
     }
 }

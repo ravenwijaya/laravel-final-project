@@ -1,4 +1,4 @@
-@extends('adminlte.master')
+@extends('adminlte.master-top-nav')
 
 @section('content')
   <div class="ml-3 mt-3">
@@ -11,11 +11,11 @@
       <form role="form" action="/jawaban/{{$id}}"  method="POST">
         @csrf
         <div class="card-body">
-    
+
             <input type="hidden" class="form-control" id="user_id" value=" {{Auth::user()->id}}" name="user_id" readonly>
             <input type="hidden" class="form-control" id="poinvote" value=0 name="poinvote" readonly>
             <input type="hidden" class="form-control" id="pertanyaan_id" value={{$id}} name="pertanyaan_id" readonly>
-  
+
           <div class="form-group">
             <label for="isi">Isi</label>
             <textarea class="form-control summernote" id="isi" name="isi" placeholder="Isi pertanyaan"></textarea>

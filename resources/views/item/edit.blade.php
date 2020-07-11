@@ -1,4 +1,4 @@
-@extends('adminlte.master')
+@extends('adminlte.master-top-nav')
 
 @section('content')
   <div class="ml-3 mt-3">
@@ -11,7 +11,7 @@
      <form role="form" action="/pertanyaan/{{$tanya->id}}" method="POST">
         @csrf
         @method('PUT')
-        
+
         <div class="card-body">
          <div class="form-group">
             <label for="id">Id Pertanyaan</label>
@@ -21,18 +21,19 @@
             <label for="judul">Judul</label>
             <input type="text" class="form-control" id="judul" value="{{$tanya->judul}}" name="judul" placeholder="Enter Judul ">
           </div>
- 
+
           <div class="form-group">
             <label for="isi">Isi</label>
             <textarea class="form-control summernote" id="isi" name="isi" placeholder="Isi pertanyaan">{!!$tanya->isi!!}</textarea>
-          </div>  
-         
-      
+          </div>
+
+
         </div>
         <!-- /.card-body -->
 
         <div class="card-footer">
           <button type="submit" class="btn btn-primary">Update</button>
+          <a href="{{ route('pertanyaan.index') }}" class="btn btn-secondary">Kembali</a>
         </div>
       </form>
     </div>

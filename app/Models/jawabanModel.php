@@ -2,7 +2,6 @@
 
 namespace App\Models;
 use Illuminate\Support\Facades\DB;
-use Symfony\Component\VarDumper\VarDumper;
 
 class JawabanModel {
 
@@ -30,11 +29,13 @@ public static function find_by_ids($id){
       return $jawab;
   }
   public static function find_by_idtanya($id){
-    $tanya = DB::table('pertanyaan')
+        $tanya = DB::table('pertanyaan')
                     ->select('pertanyaan.*', 'users.name as user_name', 'users.id as user_id','users.reputasi as user_reputasi', 'users.email as user_email')
                     ->join('users', 'pertanyaan.user_id', '=', 'users.id')
                     ->where('pertanyaan.id',$id)->first();
-    // tempelkan tag
+
+        if(!$tanya) return null;
+        // tempelkan tag
         $tags = DB::table('pertanyaan_tag as pt')
                     ->select('t.tag_name')
                     ->join('tags as t', 't.id', '=', 'pt.tag_id')
@@ -94,10 +95,12 @@ public static function find_by_ids($id){
   }
   public static function destroy($id){
       // dd($request);
+      // ambil pertanyaan id //
+      $tanya=DB::table('jawaban')->where('id', $id)->first();
       $jawab=DB::table('jawaban')
                   ->where('id',$id)
                   ->delete();
-       return $jawab;
+       return $tanya->pertanyaan_id;
    }
 
    public static function new_jawaban($request, $id) {

@@ -1,4 +1,4 @@
-@extends('adminlte.master')
+@extends('adminlte.master-top-nav')
 
 @section('content')
   <div class="ml-3 mt-3">
@@ -20,14 +20,15 @@
           <div class="form-group">
             <label for="isi">Isi</label>
             <textarea class="form-control summernote" id="isi" name="isi" placeholder="Isi jawaban">{!!$jawab->isi!!}</textarea>
-          </div>  
-         
-      
+          </div>
+
+
         </div>
         <!-- /.card-body -->
 
         <div class="card-footer">
           <button type="submit" class="btn btn-primary">Update</button>
+          <a href="/jawaban/{{$jawab->id}}" class="btn btn-secondary">Kembali</a>
         </div>
       </form>
     </div>

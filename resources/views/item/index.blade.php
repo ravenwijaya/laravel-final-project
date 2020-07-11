@@ -44,7 +44,6 @@
             @method('DELETE')
             <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash mr-1"></i> Hapus</button>
           </form>
-          <a href="/pertanyaan/{{$item->id}}/edit" class="btn btn-sm btn-danger">edit</a>
         @else
         @endif
         {{-- Proses vote bukan di index pertanyaan mengikuti stackoverflow
