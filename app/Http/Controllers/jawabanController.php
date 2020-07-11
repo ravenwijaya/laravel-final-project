@@ -56,7 +56,7 @@ class JawabanController extends Controller
     }
 
     public function update($id, Request $request) {
-        // dd($request->all());
+        $a=$request->all();
         $jawab = JawabanModel::update($id, $request->all());
         return redirect('/pertanyaan');
     }
