@@ -16,11 +16,12 @@
             <label for="id">Id Jawaban</label>
             <input type="text" class="form-control" id="id" value="{{$jawab->id}}" name="id" readonly>
           </div>
-          
+          <input type="hidden" class="form-control" id="pertanyaan_id" value="{{$jawab->pertanyaan_id}}" name="pertanyaan_id" readonly>
           <div class="form-group">
             <label for="isi">Isi</label>
-            <input type="text" class="form-control" id="isi" value="{{$jawab->isi}}" name="isi" placeholder="isi">
-          </div>
+            <textarea class="form-control summernote" id="isi" name="isi" placeholder="Isi jawaban">{!!$jawab->isi!!}</textarea>
+          </div>  
+         
       
         </div>
         <!-- /.card-body -->

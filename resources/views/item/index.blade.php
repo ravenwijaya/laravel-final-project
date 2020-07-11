@@ -37,6 +37,7 @@
             @method('DELETE')
             <button type="submit" class="btn btn-sm btn-danger"> <i class="fas fa-trash"></i> </button>
           </form>
+          <a href="/pertanyaan/{{$item->id}}/edit" class="btn btn-sm btn-danger">edit</a>
         @else
         @endif
         <!-- pembuat pertanyaan tidak dapat membuat jawaban sendiri -->
@@ -49,10 +50,7 @@
             </a>
             
         @endif
-        @if ($item->user_id == Auth::user()->id)
-               
-                  <a href="/pertanyaan/{{$item->id}}/edit" class="btn btn-sm btn-danger">edit</a>
-                  @endif
+
                     <a href="/jawaban/{{$item->id}}"  class="btn btn-primary btn-sm">Jawaban dan Komentar</a>
         {{--
         <a href="{{ route('komentar.pertanyaan', $item->id) }}" class="btn btn-primary btn-sm">

@@ -77,6 +77,14 @@
         <div class="card-body">
             {!! $row->isi !!}
             <hr>
+            @if ($row->user_id == Auth::user()->id)
+                          <form action="/jawaban/{{$row->id}}" method="post" style="display: inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger"> <i class="fas fa-trash"></i> </button>
+                        </form>
+                         <a href="/jawaban/{{$row->id}}/edit" class="btn btn-sm btn-danger">edit</a>
+             @endif
             <a href="{{ route('votejawaban.up', $row->id) }}" class="btn btn-sm btn-success {{ $row->user_id == Auth::user()->id ? 'disabled' : '' }}">
                 <i class="fa fa-thumbs-up" aria-hidden="true"></i>
             </a>
@@ -85,8 +93,8 @@
                 <i class="fa fa-thumbs-down" aria-hidden="true"></i>
             </a>
             
-            <div class="comment">
-                <ol style="display:grid; list-style: none; margin-top: -2.5em" class="ml-5">
+            <div class="comment" >
+                <ol style="display:grid; list-style: none; margin-top: -2.5em margin-left:-70px " class="ml-5" >
                     @forelse ($row->komentar as $i => $comment)
                     <li style="border-bottom: 1px solid rgba(95, 48, 48, 0.1)" class="pb-1">
                         <span>{{ $i+1 }}. {{ $comment->isi }}.&nbsp;&nbsp;</span>
@@ -178,6 +186,7 @@
                           <a >vote: {{ $item->poinvote }}</a>
                           <p>{!! $item->isi !!}</p>
                           <div class="card-footer">
+                          
                                 <button type="submit" class="btn btn-sm btn-success"> <i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
                                 <button type="submit" class="btn btn-sm btn-warning"> <i class="fa fa-thumbs-down" aria-hidden="false"></i> </button>
 
