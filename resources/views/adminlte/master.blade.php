@@ -70,22 +70,9 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('/adminlte/dist/js/adminlte.min.js') }}"></script>
 
-<script src="{{asset('/adminlte/plugins/datatables/jquery.dataTables.js')}}"></script>
-<script src="{{asset('/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
-
 <!-- Sweet Alert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
-<!--
-<script>
-$(function () {
-    Swal.fire({
-        icon: 'success',
-        text: 'Berhasil memasang script sweet alert'
-    });
-});
-</script>
--->
 <script>
 $(function () {
     $('textarea.summernote').summernote({height: 150});
@@ -103,7 +90,7 @@ $(function () {
 </script>
 @endif
 
-@stack('scripts')
+@stack('js')
 <!-- jQuery -->
 
 </body>

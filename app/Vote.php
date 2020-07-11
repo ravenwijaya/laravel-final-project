@@ -105,6 +105,11 @@ class Vote extends Model
             ->update([
                 'jawaban_terbaik' => $jawaban_id
             ]);
+        // update tabel jawaban //
+        $update_jawaban = DB::table('jawaban')
+            ->where('id', $jawaban_id)
+            ->where('pertanyaan_id', $data->pertanyaan_id)
+            ->update(['is_terbaik' => 1]);
         // update reputasi yg punya jawaban //
         $now = date_create()->format('Y-m-d H:i:s');
         $update_user = DB::table('users')

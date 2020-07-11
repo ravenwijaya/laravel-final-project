@@ -18,7 +18,7 @@ class CreateJawabanTable extends Migration
             $table->string('isi');
             $table->unsignedBigInteger('pertanyaan_id');
             $table->unsignedBigInteger('user_id');
-            $table->integer('poinvote')->nullable();
+            $table->integer('poinvote')->default(0);
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('pertanyaan_id')->references('id')->on('pertanyaan')->onDelete('cascade');
             $table->timestamps();

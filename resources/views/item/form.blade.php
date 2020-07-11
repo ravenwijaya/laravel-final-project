@@ -1,8 +1,8 @@
-@extends('adminlte.master')
+@extends('adminlte.master-top-nav')
 
 @section('content')
-  <div class="ml-3 mt-3">
-    <div class="card card-primary">
+  <div class="ml-3">
+    <div class="card card-primary" style="width: 100%">
       <div class="card-header">
         <h3 class="card-title">Pertanyaan Baru</h3>
       </div>
@@ -11,7 +11,7 @@
       <form role="form" action="/pertanyaanc" method="POST">
         @csrf
         <div class="card-body">
-    
+
             <input type="hidden" class="form-control" id="user_id" value=" {{Auth::user()->id}}" name="user_id" readonly>
             <input type="hidden" class="form-control" id="poinvote" value=0 name="poinvote" readonly>
           <div class="form-group">
