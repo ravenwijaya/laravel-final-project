@@ -116,16 +116,21 @@
 @else
     <h3 class="clearfix">Belum ada jawaban</h3>
 @endif
-<hr>
-<form action="{{ route('jawaban.store', $tanya->id) }}" method="POST" class="mb-3">
-    @csrf
-    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-    <div class="form-group">
-        <label for="isi">Jawaban Anda</label>
-        <textarea class="form-control summernote" placeholder="Isi komentar" id="isi" name="isi" required></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-    <a href="{{ route('pertanyaan.index') }}" class="btn btn-secondary">Kembali</a>
-</form>
-<hr>
+
+@if ($tanya->user_id != Auth::user()->id)
+        
+                <hr>
+                    <form action="{{ route('jawaban.store', $tanya->id) }}" method="POST" class="mb-3">
+                        @csrf
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                        <div class="form-group">
+                            <label for="isi">Jawaban Anda</label>
+                            <textarea class="form-control summernote" placeholder="Isi komentar" id="isi" name="isi" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        
+                    </form>
+                    <hr>
+                    @endif
+
 @endsection

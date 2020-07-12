@@ -14,7 +14,7 @@ class AddColJawabanIsTerbaik extends Migration
     public function up()
     {
         Schema::table('jawaban', function (Blueprint $table) {
-            $table->boolean('is_tebaik')->default(0);
+            $table->boolean('is_terbaik')->default(0);
         });
     }
 
